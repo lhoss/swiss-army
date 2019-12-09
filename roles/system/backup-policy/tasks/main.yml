@@ -1,0 +1,5 @@
+---
+- name: install restic ("fast, secure, efficient backup program")
+  package:
+    name: restic
+    state: present
