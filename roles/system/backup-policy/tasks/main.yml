@@ -1,5 +1,17 @@
 ---
+- name: import Vault-encrypted variables
+  include_vars: vault.yml
+
 - name: install restic ("fast, secure, efficient backup program")
   package:
     name: restic
     state: present
+
+- name: install Google Cloud application credentials
+  template:
+    src: gs-secret-restic-key.json
+    dest: "{{ user_home_dir }}/.config/gs-secret-restic-key.json"
+    mode: 0600
+    group: "{{ target_group }}"
+    owner: "{{ target_user }}"
+    seuser: system_u
